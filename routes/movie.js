@@ -24,7 +24,6 @@ router.post("/getByIdWithUser", async (req, res) => {
     }
 });
 
-/******* below are all the routes that WILL NOT pass through the middleware ********/
 
 router.use((req, res, next) => {
     if (!req.user.admin) return res.json({ msg: "NOT ADMIN" })
