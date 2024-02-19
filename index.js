@@ -9,7 +9,7 @@ app.use(express.urlencoded({ extended: false }));
 
 (async () => {
     try {
-        await mongoose.connect("mongodb://localhost:27017/test")
+        await mongoose.connect("mongodb+srv://Webdev:12345@webdevasig.pjajynu.mongodb.net/")
         console.log('Connection has been established successfully.');
     } catch (error) {
         console.error('Unable to connect to the database:', error);
