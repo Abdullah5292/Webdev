@@ -3,6 +3,7 @@ const Users = require("../models/User");
 var express = require("express");
 var router = express.Router();
 const jwt = require("jsonwebtoken")
+const MY_SECRET = "MY_SECRET";
 
 router.post("/signUp", async (req, res) => {
     try {
@@ -39,8 +40,6 @@ router.post("/signUp", async (req, res) => {
 router.post("/login", async (req, res) => {
     try {
         const { email, password } = req.body
-        
-        if (!email) return res.json({ msg: "USERNAME EMPTY" })
 
         const user = await Users.findOne({ email })
         if (!user) return res.json({ msg: "USER NOT FOUND" })
@@ -51,7 +50,6 @@ router.post("/login", async (req, res) => {
         const token = jwt.sign({
             email,
             createdAt: new Date(),
-            age: user.age,
             admin: user.admin,
         }, "MY_SECRET", { expiresIn: "1d" });
 
