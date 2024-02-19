@@ -5,14 +5,11 @@ const UserSchema = new mongoose.Schema({
     password: String,
     firstName: String,
     lastName: String,
-    age: {
-        type: Number,
-        default: 0
-    },
+    admin: { type: Boolean, default: false },
     createdAt: {
         type: Date,
         default: Date.now
-    }
+    },
 });
 
 const Users = mongoose.model('Users', UserSchema);
