@@ -36,6 +36,10 @@ router.post("/addBook", async (req, res) => {
     try {
         const user = await Users.findOne({ email: req.body.email })
         if (!user) return res.json({ msg: "USER NOT FOUND" })
+
+        const existingBook = await Books.findOne({ isbn: req.body.isbn })
+        if (existingBook) return res.json({ msg: "ISBN ALREADY EXISTS" })
+
         await Books.create({ ...req.body, user: user._id })
         res.json({ msg: "BOOK ADDED" })
     } catch (error) {

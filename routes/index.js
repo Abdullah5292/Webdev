@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken")
 
 const authRouter = require("./auth");
 const bookRouter = require("./book");
+const movieRouter = require("./movie");
 
 router.use("/auth", authRouter);
 
@@ -26,5 +27,6 @@ router.use(async (req, res, next) => {
 
 
 router.use("/books", bookRouter);
+router.use("/movies", movieRouter);
 
 module.exports = router;
