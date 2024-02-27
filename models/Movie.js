@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
 const MovieSchema = new mongoose.Schema({
-    Id:String,
-    name: String,
+    id: Number,
+    title: String,
     year: String,
     genre: String,
     user: { type: mongoose.SchemaTypes.ObjectId, ref: 'Users' },
@@ -12,6 +12,7 @@ const MovieSchema = new mongoose.Schema({
     }
 });
 
-const Movie = mongoose.model('Movies', BookSchema);
+const Movie = mongoose.model('Movies', MovieSchema);
 
 module.exports = Movie;
+

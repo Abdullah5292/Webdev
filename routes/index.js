@@ -6,6 +6,7 @@ const authRouter = require("./auth");
 const bookRouter = require("./book");
 const movieRouter = require("./movie");
 
+
 router.use("/auth", authRouter);
 
 
@@ -14,6 +15,7 @@ router.use(async (req, res, next) => {
         const token = req.headers.authorization;
         console.log(token)
         const user = jwt.verify(token.split(" ")[1], "MY_SECRET")
+        console.log(user);
         req.user = user;
         next()
     } catch (e) {
@@ -26,7 +28,7 @@ router.use(async (req, res, next) => {
 
 
 
-router.use("/books", bookRouter);
-router.use("/movies", movieRouter);
+router.use("/book", bookRouter);
+router.use("/movie", movieRouter);
 
 module.exports = router;

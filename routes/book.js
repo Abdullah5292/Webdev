@@ -1,19 +1,20 @@
 const Users = require("../models/User");
 const Books = require("../models/Book");
+
 var express = require("express");
 var router = express.Router();
 
-router.post("/getByIsbn", async (req, res) => {
+router.get("/getByIsbn", async (req, res) => {
     try {
         const book = await Books.findOne({ isbn: req.body.isbn })
         if (!book) return res.json({ msg: "BOOK NOT FOUND" })
         res.json({ msg: "BOOK FOUND", data: book })
     } catch (error) {
-        console.error(error)
+        console.log(error);
     }
 });
 
-router.post("/getByIsbnWithUser", async (req, res) => {
+router.get("/getByIsbnWithUser", async (req, res) => {
     try {
         const book = await Books.findOne({ isbn: req.body.isbn }).populate("user")
         if (!book) return res.json({ msg: "BOOK NOT FOUND" })
@@ -47,7 +48,7 @@ router.post("/addBook", async (req, res) => {
     }
 });
 
-router.post("/deleteByIsbn", async (req, res) => {
+router.delete("/deleteByIsbn", async (req, res) => {
     try {
         const book = await Books.findOne({ isbn: req.body.isbn })
         if (!book) return res.json({ msg: "BOOK NOT FOUND" })
@@ -58,4 +59,20 @@ router.post("/deleteByIsbn", async (req, res) => {
     }
 });
 
+router.put("/updateByIsbn", async (req, res) => {
+    try {
+        const book = await Books.findOne({ isbn: req.body.isbn });
+
+        if (!book) return res.json({ msg: "BOOK NOT FOUND" });
+
+        book.name = req.body.name;
+        await book.save();
+
+        res.json({ msg: "BOOK UPDATED", data: book });
+    } catch (error) {
+        console.error(error);
+    }
+});
+
 module.exports = router
+
