@@ -72,7 +72,8 @@ router.put('/updateById', async (req, res) => {
         if (!movie) return res.json({ msg: 'MOVIE NOT FOUND' });
         await Movies.updateOne({ id
             : req.body.id }, { ...req.body });
-        res.json({ msg: 'MOVIE UPDATED' });
+        res.json({ msg: 'MOVIE UPDATED', data: movie  });
+        
     } catch (error) {
         console.error(error);
     }
